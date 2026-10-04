@@ -90,3 +90,19 @@ Developed for **HackFusion 2026**.
 The following video demonstrates the Round 2 progress of CivicLens AI, including the initial codebase, UI, backend/database setup, and working functionality.
 
 [▶️ Watch CivicLens AI Round 2 Progress Demo](https://drive.google.com/file/d/15fD8YMLm15DoBOYgSTH-lwL1xILc7xkl/view)
+## 🚀 Round 3 – Product Build
+
+### Current Progress
+- Working prototype completed and validated
+- Citizen civic issue reporting implemented
+- AI-assisted issue analysis and classification implemented
+- Priority suggestion and department routing implemented
+- SQLite database integration completed
+- Admin dashboard and complaint management completed
+- Complaint status updates implemented
+- Citizen complaint tracking completed
+- End-to-end workflow successfully tested
+- Final pitch and prototype demo prepared## 🎥 Round 3 – Final Pitch & Prototype Demo
+
+[▶️ Watch CivicLens AI Final Pitch & Prototype Demo](https://drive.google.com/file/d/1gHo1Iw74Fi5_tcN-Iq4FbFhwFOhn2jBZ/view?usp=drivesdk)
+- 
