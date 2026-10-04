@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Admin Dashboard - CivicLens AI
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<nav class="navbar">
+
+    <div class="logo">
+        🏙️ CivicLens AI
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/report">
+            Report Issue
+        </a>
+
+        <a href="/track">
+            Track Complaint
+        </a>
+
+        <a href="/admin">
+            Admin Dashboard
+        </a>
+
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+
+    <div class="card">
+
+
+        <div class="badge">
+            Authority Intelligence Dashboard
+        </div>
+
+
+        <h1>
+            📊 CivicLens Admin Dashboard
+        </h1>
+
+
+        <p class="subtitle">
+            Monitor civic reports, review evidence,
+            AI-assisted priority signals and
+            resolution progress.
+        </p>
+
+
+        <!-- ANALYTICS -->
+
+
+        <div
+            style="
+                display: grid;
+                grid-template-columns:
+                    repeat(auto-fit, minmax(160px, 1fr));
+                gap: 15px;
+                margin: 30px 0;
+            "
+        >
+
+
+            <div class="result-box">
+
+                <small>
+                    TOTAL REPORTS
+                </small>
+
+                <h1>
+                    {{ total }}
+                </h1>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <small>
+                    ⏳ PENDING
+                </small>
+
+                <h1>
+                    {{ pending }}
+                </h1>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <small>
+                    ⚙️ IN PROGRESS
+                </small>
+
+                <h1>
+                    {{ in_progress }}
+                </h1>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <small>
+                    ✅ RESOLVED
+                </small>
+
+                <h1>
+                    {{ resolved }}
+                </h1>
+
+            </div>
+
+
+            <div
+                class="result-box"
+                style="
+                    background: #fef2f2;
+                    border: 1px solid #fecaca;
+                "
+            >
+
+                <small>
+                    🔴 ACTIVE HIGH PRIORITY
+                </small>
+
+                <h1>
+                    {{ high_priority }}
+                </h1>
+
+            </div>
+
+
+        </div>
+
+
+        <h2>
+            Recent Civic Reports
+        </h2>
+
+
+        <br>
+
+
+        {% if complaints %}
+
+
+        <div class="table-wrapper">
+
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Complaint
+                        </th>
+
+                        <th>
+                            Location
+                        </th>
+
+                        <th>
+                            Issue
+                        </th>
+
+                        <th>
+                            Priority
+                        </th>
+
+                        <th>
+                            Department
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                {% for complaint in complaints %}
+
+
+                    <tr>
+
+
+                        <td>
+
+                            <a
+                                href="/complaint/{{ complaint['complaint_id'] }}"
+                                style="
+                                    font-weight: bold;
+                                    color: #2563eb;
+                                    text-decoration: none;
+                                "
+                            >
+
+                                {{ complaint["complaint_id"] }}
+
+                            </a>
+
+                        </td>
+
+
+                        <td>
+                            {{ complaint["location"] }}
+                        </td>
+
+
+                        <td>
+                            {{ complaint["issue"] }}
+                        </td>
+
+
+                        <td>
+
+                            {% if complaint["priority"] == "High" %}
+
+                                🔴 High
+
+                            {% elif complaint["priority"] == "Medium" %}
+
+                                🟠 Medium
+
+                            {% elif complaint["priority"] == "Low" %}
+
+                                🟢 Low
+
+                            {% else %}
+
+                                {{ complaint["priority"] }}
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td>
+                            {{ complaint["department"] }}
+                        </td>
+
+
+                        <td>
+
+                            {% if complaint["status"] == "Resolved" %}
+
+                                ✅ Resolved
+
+                            {% elif complaint["status"] == "In Progress" %}
+
+                                ⚙️ In Progress
+
+                            {% else %}
+
+                                ⏳ Pending
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td>
+
+                            <form
+                                action="/update-status/{{ complaint['complaint_id'] }}"
+                                method="POST"
+                            >
+
+                                <select
+                                    name="status"
+                                    class="admin-select"
+                                >
+
+                                    <option
+                                        value="Pending"
+                                        {% if complaint["status"] == "Pending" %}
+                                        selected
+                                        {% endif %}
+                                    >
+                                        Pending
+                                    </option>
+
+                                    <option
+                                        value="In Progress"
+                                        {% if complaint["status"] == "In Progress" %}
+                                        selected
+                                        {% endif %}
+                                    >
+                                        In Progress
+                                    </option>
+
+                                    <option
+                                        value="Resolved"
+                                        {% if complaint["status"] == "Resolved" %}
+                                        selected
+                                        {% endif %}
+                                    >
+                                        Resolved
+                                    </option>
+
+                                </select>
+
+
+                                <button
+                                    type="submit"
+                                    class="small-btn"
+                                >
+                                    Update
+                                </button>
+
+                            </form>
+
+                        </td>
+
+
+                    </tr>
+
+
+                {% endfor %}
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+        {% else %}
+
+
+        <div class="result-box">
+
+            <h3>
+                No civic reports yet.
+            </h3>
+
+        </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+</div>
+
+
+<footer class="footer">
+    CivicLens AI • Authority Intelligence Dashboard
+</footer>
+
+
+</body>
+
+</html>

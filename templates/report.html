@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Report Issue - CivicLens AI</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        🏙️ CivicLens AI
+    </div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/report">Report Issue</a>
+        <a href="/admin">Admin Dashboard</a>
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>📸 Report a Civic Issue</h1>
+
+        <p class="subtitle">
+            Upload a photo of a pothole, garbage,
+            damaged streetlight, water leakage or
+            another civic problem.
+        </p>
+
+
+        <form
+            action="/analyze"
+            method="POST"
+            enctype="multipart/form-data"
+        >
+
+            <div class="form-group">
+
+                <label>
+                    Issue Photo
+                </label>
+
+                <input
+                    type="file"
+                    name="image"
+                    accept="image/*"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Location / Area
+                </label>
+
+                <input
+                    type="text"
+                    name="location"
+                    placeholder="Example: Hayathnagar"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Description
+                </label>
+
+                <textarea
+                    name="description"
+                    rows="5"
+                    placeholder="Describe what you noticed..."
+                ></textarea>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn"
+            >
+                🤖 Analyze & Submit
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<footer class="footer">
+    CivicLens AI • AI-assisted civic issue reporting
+</footer>
+
+</body>
+
+</html>

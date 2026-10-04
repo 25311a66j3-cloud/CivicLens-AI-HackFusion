@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Track Complaint - CivicLens AI</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        🏙️ CivicLens AI
+    </div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/report">Report Issue</a>
+        <a href="/track">Track Complaint</a>
+        <a href="/admin">Admin Dashboard</a>
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="badge">
+            Complaint Tracking
+        </div>
+
+        <h1>🔎 Track Your Complaint</h1>
+
+        <p class="subtitle">
+            Enter your CivicLens complaint ID to
+            check its latest status.
+        </p>
+
+
+        <form action="/track" method="POST">
+
+            <div class="form-group">
+
+                <label>
+                    Complaint ID
+                </label>
+
+                <input
+                    type="text"
+                    name="complaint_id"
+                    placeholder="Example: CL-DBF1CA"
+                    required
+                >
+
+            </div>
+
+            <button
+                type="submit"
+                class="btn"
+            >
+                Track Complaint
+            </button>
+
+        </form>
+
+
+        {% if searched %}
+
+            <br><br>
+
+            {% if complaint %}
+
+                <div class="result-box">
+
+                    <h2>
+                        Complaint Found ✅
+                    </h2>
+
+                    <br>
+
+                    <p>
+                        <strong>Complaint ID:</strong>
+                        {{ complaint["complaint_id"] }}
+                    </p>
+
+                    <br>
+
+                    <p>
+                        <strong>Issue:</strong>
+                        {{ complaint["issue"] }}
+                    </p>
+
+                    <br>
+
+                    <p>
+                        <strong>Location:</strong>
+                        {{ complaint["location"] }}
+                    </p>
+
+                    <br>
+
+                    <p>
+                        <strong>Department:</strong>
+                        {{ complaint["department"] }}
+                    </p>
+
+                    <br>
+
+                    <p>
+                        <strong>Suggested Priority:</strong>
+                        {{ complaint["priority"] }}
+                    </p>
+
+                    <br>
+
+                    <p>
+                        <strong>Current Status:</strong>
+                    </p>
+
+                    <br>
+
+                    {% if complaint["status"] == "Resolved" %}
+
+                        <span
+                            class="status"
+                            style="
+                                background: #dcfce7;
+                                color: #166534;
+                            "
+                        >
+                            ✓ Resolved
+                        </span>
+
+                    {% elif complaint["status"] == "In Progress" %}
+
+                        <span
+                            class="status"
+                            style="
+                                background: #dbeafe;
+                                color: #1d4ed8;
+                            "
+                        >
+                            ⚙ In Progress
+                        </span>
+
+                    {% else %}
+
+                        <span class="status">
+                            ⏳ Pending
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+            {% else %}
+
+                <div
+                    class="result-box"
+                    style="
+                        border: 1px solid #fecaca;
+                        background: #fef2f2;
+                    "
+                >
+
+                    <h3>
+                        Complaint not found
+                    </h3>
+
+                    <br>
+
+                    <p>
+                        Check the complaint ID and
+                        try again.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+<footer class="footer">
+    CivicLens AI • Transparent complaint tracking
+</footer>
+
+</body>
+
+</html>

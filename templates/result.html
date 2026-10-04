@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        CivicLens AI Analysis
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<nav class="navbar">
+
+    <div class="logo">
+        🏙️ CivicLens AI
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/report">
+            Report Issue
+        </a>
+
+        <a href="/admin">
+            Admin Dashboard
+        </a>
+
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+
+    <div class="card">
+
+
+        <div class="badge">
+            Analysis Complete
+        </div>
+
+
+        <h1>
+            🤖 CivicLens AI Analysis
+        </h1>
+
+
+        <p class="subtitle">
+
+            Your civic report has been analyzed
+            and submitted successfully.
+
+        </p>
+
+
+        <!-- DUPLICATE WARNING -->
+
+
+        {% if duplicate_found %}
+
+
+        <div style="
+            background: #fff7ed;
+            border: 1px solid #fdba74;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        ">
+
+            <h3>
+                ⚠️ Possible Duplicate Detected
+            </h3>
+
+            <br>
+
+            <p>
+
+                CivicLens found an active report
+                with the same issue type and
+                location.
+
+            </p>
+
+            <br>
+
+            <p>
+
+                Similar Complaint:
+
+                <strong>
+                    {{ duplicate_id }}
+                </strong>
+
+            </p>
+
+            <br>
+
+            <p style="color: #6b7280;">
+
+                This is only a possible match.
+                A responsible authority can review
+                the reports before merging them.
+
+            </p>
+
+        </div>
+
+
+        {% else %}
+
+
+        <div style="
+            background: #ecfdf5;
+            border: 1px solid #86efac;
+            padding: 18px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        ">
+
+            <strong>
+                ✓ No matching active complaint detected
+            </strong>
+
+        </div>
+
+
+        {% endif %}
+
+
+        <!-- BASIC INFORMATION -->
+
+
+        <div class="result-grid">
+
+
+            <div class="result-box">
+
+                <small>
+                    Complaint ID
+                </small>
+
+                <h3>
+                    {{ complaint_id }}
+                </h3>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <small>
+                    Current Status
+                </small>
+
+                <br><br>
+
+                <span class="status">
+                    Pending
+                </span>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <small>
+                    Location
+                </small>
+
+                <h3>
+                    {{ location }}
+                </h3>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <small>
+                    Description
+                </small>
+
+                <h3>
+
+                    {{ description if description else "Not provided" }}
+
+                </h3>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- AI RESULT -->
+
+
+        <h2>
+            AI Assessment
+        </h2>
+
+
+        <br>
+
+
+        <div class="result-box">
+
+
+            <pre style="
+                white-space: pre-wrap;
+                font-family: Arial, sans-serif;
+                line-height: 1.8;
+            ">{{ ai_result }}</pre>
+
+
+        </div>
+
+
+        <br>
+
+
+        <p class="subtitle">
+
+            AI classification and priority are
+            assistance signals. Authorities can
+            review the submitted evidence before
+            taking action.
+
+        </p>
+
+
+        <a
+            href="/report"
+            class="btn"
+        >
+            Report Another Issue
+        </a>
+
+
+        <a
+            href="/admin"
+            class="btn btn-secondary"
+        >
+            View Dashboard
+        </a>
+
+
+    </div>
+
+
+</div>
+
+
+<footer class="footer">
+
+    CivicLens AI • Intelligent civic issue management
+
+</footer>
+
+
+</body>
+
+</html>
+    
