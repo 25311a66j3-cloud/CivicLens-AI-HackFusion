@@ -72,9 +72,9 @@ Current development checkpoint:
 
 - GitHub repository initialized
 - README documentation created
-- Initial codebase and UI validation in progress
-- Backend/API and database setup in progress
-- Initial working functionality under validation
+- Initial codebase and UI completed
+- Backend/API and database setup completed
+- Initial working functionality validated
 
 ## Expected Outcome
 
@@ -85,3 +85,8 @@ CivicLens AI aims to reduce manual effort in civic complaint management, improve
 **Team Hit**
 
 Developed for **HackFusion 2026**.
+## 🎥 Round 2 – Progress Demo
+
+The following video demonstrates the Round 2 progress of CivicLens AI, including the initial codebase, UI, backend/database setup, and working functionality.
+
+[▶️ Watch CivicLens AI Round 2 Progress Demo](https://drive.google.com/file/d/15fD8YMLm15DoBOYgSTH-lwL1xILc7xkl/view)
